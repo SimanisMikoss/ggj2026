@@ -1,6 +1,4 @@
 extends Area3D
-
-
 var target_node : Node3D 
 
 func _ready():
