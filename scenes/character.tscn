@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://ddvbgfpqg0dbl"]
+
+[ext_resource type="Texture2D" uid="uid://dnxekqy5t4rsq" path="res://sprites/man prototype.png" id="1_agfs1"]
+[ext_resource type="Script" uid="uid://bji8r3p72qylt" path="res://scenes/interaction_zone.gd" id="2_rkhd4"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_lrhn5"]
+height = 2.5483398
+radius = 1.9892578
+
+[node name="Character" type="Node3D"]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0260794, 0)
+billboard = 1
+texture = ExtResource("1_agfs1")
+
+[node name="Area3D" type="Area3D" parent="."]
+script = ExtResource("2_rkhd4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2092285, 0)
+shape = SubResource("CylinderShape3D_lrhn5")
+
+[node name="HeadText" type="Label3D" parent="Area3D"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7372222, 0)
+visible = false
+pixel_size = 0.01
+billboard = 1
+text = "FUCK OFFF"
