@@ -50,7 +50,11 @@ script = ExtResource("1_kdtuy")
 [node name="CharacterVisuals_A" parent="." instance=ExtResource("2_x1ysr")]
 transform = Transform3D(0.11, 0, 0, 0, 0.11, 0, 0, 0, 0.11, 0, 1.584256, 0)
 animation = &"default"
-frame = 0
+frame_progress = 0.0
+
+[node name="CharacterVisuals_A2" parent="." instance=ExtResource("2_x1ysr")]
+transform = Transform3D(0.11, 0, 0, 0, 0.11, 0, 0, 0, 0.11, 0, 1.584256, 0)
+animation = &"default"
 frame_progress = 0.0
 
 [node name="AnimatedSprite3D2" type="AnimatedSprite3D" parent="."]

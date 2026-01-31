@@ -19,6 +19,7 @@ func _ready() -> void:
 	my_sprite.animation_finished.connect(_on_animation_finished)
 
 func change_animation(animation_type):
+	print("trying to play ", animation_type)
 	if current_animation == animation_type:
 		return
 	current_animation = animation_type
@@ -30,6 +31,7 @@ func change_animation(animation_type):
 
 
 func _on_animation_finished():
-	my_sprite.play(base_anim)
+	print("attack animation finished")
+	#my_sprite.play(base_anim)
 			
 		#anim.play(base_anim)

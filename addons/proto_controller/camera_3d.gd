@@ -2,7 +2,7 @@ extends Camera3D
 class_name CameraController
 
 var end_screen = preload("res://scenes/end_screen.tscn")
-@export var ray_length := 200.0
+@export var ray_length := 10.0
 var has_valid_interactable: bool = false
 var interactable
 
@@ -38,10 +38,11 @@ func damage_player(amount: int):
 		print("game over")
 		end_game()
 		
-func end_game():
+func end_game(victory = false):
 	Global.input_allowed = false
 	var end_screen_instance = end_screen.instantiate()
 	add_child(end_screen_instance)
+	end_screen_instance.show_end_screen(victory)
 
 func check_for_interactable():
 	var mouse_pos = get_viewport().get_mouse_position()
@@ -92,7 +93,7 @@ func try_remove_mask(remover: Node3D):
 		
 func remove_mask(remover: Node3D):
 	print("player remove mask")
-	remover.equip_mask(item_in_hands)
+	remover.equip_mask(self, item_in_hands)
 	has_mask = false
 	show_hands(false)
 	

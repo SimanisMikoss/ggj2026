@@ -21,17 +21,11 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_y6kol")
-}, {
-"duration": 1.0,
 "texture": ExtResource("3_y6kol")
-}, {
-"duration": 1.0,
-"texture": ExtResource("1_bh5hy")
 }],
 "loop": false,
 "name": &"attack",
-"speed": 10.0
+"speed": 60.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -48,7 +42,6 @@ billboard = 2
 sprite_frames = SubResource("SpriteFrames_lrhn5")
 animation = &"attack"
 autoplay = "default"
-frame = 1
 frame_progress = 1.0
 
 [node name="Sprite3D" type="Sprite3D" parent="."]

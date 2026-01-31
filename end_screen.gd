@@ -1,11 +1,11 @@
 extends Control
+@export var end_screen_delay: float
 
+@onready var victory_animation:  AnimationPlayer = get_node("%VictoryAnimation")
+@onready var defeat_animation: AnimationPlayer = get_node("%DefeatAnimation")
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func show_end_screen(victory: bool):
+	if victory == true:
+		victory_animation.play("victory")
+	else:
+		defeat_animation.play("defeat")

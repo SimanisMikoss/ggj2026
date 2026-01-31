@@ -1,8 +1,153 @@
-[gd_scene load_steps=4 format=3 uid="uid://cmf521sppja8e"]
+[gd_scene load_steps=10 format=3 uid="uid://cmf521sppja8e"]
 
 [ext_resource type="Script" uid="uid://c55knttoqvslw" path="res://end_screen.gd" id="1_6e1uj"]
 [ext_resource type="Texture2D" uid="uid://b8d1r86lfnvrn" path="res://sprites_placeholder/dead screen.png" id="2_jc7ji"]
 [ext_resource type="PackedScene" uid="uid://cpjqgy1oon0so" path="res://scenes/restart_button.tscn" id="3_jc7ji"]
+
+[sub_resource type="Animation" id="Animation_jc7ji"]
+resource_name = "victory"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:theme_override_colors/font_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.32272613, 0.53906786, 0.46728477, 0), Color(0.32156864, 0.5372549, 0.46666667, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Label/RestartButton:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_87vmq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:theme_override_colors/font_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.32272613, 0.53906786, 0.46728477, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Label/RestartButton:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g44xs"]
+_data = {
+&"RESET": SubResource("Animation_87vmq"),
+&"victory": SubResource("Animation_jc7ji")
+}
+
+[sub_resource type="Animation" id="Animation_vj8vg"]
+resource_name = "defeat"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label/RestartButton2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_plosh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label/RestartButton2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4j4el"]
+_data = {
+&"RESET": SubResource("Animation_plosh"),
+&"defeat": SubResource("Animation_vj8vg")
+}
 
 [node name="EndScreen" type="Control"]
 layout_mode = 3
@@ -14,7 +159,7 @@ grow_vertical = 2
 script = ExtResource("1_6e1uj")
 
 [node name="Victory" type="TextureRect" parent="."]
-visible = false
+modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -36,16 +181,24 @@ offset_right = 69.25
 offset_bottom = 31.75
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(0.3230395, 0.53869957, 0.46763545, 1)
+theme_override_colors/font_color = Color(0.32272613, 0.53906786, 0.46728477, 0)
 theme_override_font_sizes/font_size = 117
 text = "SURVIVED"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="RestartButton" parent="Victory/Label" instance=ExtResource("3_jc7ji")]
+visible = false
 layout_mode = 1
 
+[node name="VictoryAnimation" type="AnimationPlayer" parent="Victory"]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_g44xs")
+}
+
 [node name="Defeat" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -74,4 +227,11 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="RestartButton2" parent="Defeat/Label" instance=ExtResource("3_jc7ji")]
+visible = false
 layout_mode = 1
+
+[node name="DefeatAnimation" type="AnimationPlayer" parent="Defeat"]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_4j4el")
+}

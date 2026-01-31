@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://ddvbgfpqg0dbl"]
+[gd_scene load_steps=7 format=3 uid="uid://ddvbgfpqg0dbl"]
 
+[ext_resource type="Texture2D" uid="uid://c2br6gaubkpdc" path="res://sprites/masking1a.png" id="2_lrhn5"]
 [ext_resource type="Script" uid="uid://bji8r3p72qylt" path="res://scripts/character_interaction.gd" id="2_rkhd4"]
-[ext_resource type="Texture2D" uid="uid://bb1j48r8odwh5" path="res://sprites_placeholder/mask2.png" id="3_lrhn5"]
+[ext_resource type="Script" uid="uid://bcb7egb1itya1" path="res://character_mask.gd" id="3_dp8ca"]
 [ext_resource type="PackedScene" uid="uid://cukr34u5i33gj" path="res://scenes/character_visuals.tscn" id="3_my7n2"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rkhd4"]
@@ -16,12 +17,7 @@ radius = 3.514386
 [node name="Area3D" type="Area3D" parent="."]
 collision_layer = 2
 script = ExtResource("2_rkhd4")
-
-[node name="CharacterMask" type="Sprite3D" parent="Area3D"]
-unique_name_in_owner = true
-transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 1.8940794, 0.016803384)
-billboard = 2
-texture = ExtResource("3_lrhn5")
+damage_player_delay = 0.06
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.892334, 0)
@@ -35,6 +31,17 @@ pixel_size = 0.01
 billboard = 1
 text = "HELLO"
 
+[node name="MaskParent" type="Node3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.012, 2.291, 0)
+
+[node name="CharacterMask" type="Sprite3D" parent="Area3D/MaskParent"]
+unique_name_in_owner = true
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+billboard = 2
+texture = ExtResource("2_lrhn5")
+script = ExtResource("3_dp8ca")
+max_distance = 0.5
+
 [node name="CharacterVisuals" parent="Area3D" instance=ExtResource("3_my7n2")]
 unique_name_in_owner = true
 
@@ -45,3 +52,6 @@ collision_layer = 7
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D/PlayerDetectionArea"]
 shape = SubResource("SphereShape3D_lrhn5")
+
+[node name="DamageDelayTimer" type="Timer" parent="Area3D"]
+unique_name_in_owner = true
