@@ -16,6 +16,7 @@ var item_in_hands_visual: TextureRect
 var player_life: int
 var player_max_life: int = 100
 signal player_damaged()
+signal enemy_defeated()
 
 func _ready():
 	hands = get_node("%Hands") 
@@ -94,6 +95,7 @@ func try_remove_mask(remover: Node3D):
 func remove_mask(remover: Node3D):
 	print("player remove mask")
 	remover.equip_mask(self, item_in_hands)
+	enemy_defeated.emit()
 	has_mask = false
 	show_hands(false)
 	

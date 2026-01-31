@@ -21,6 +21,8 @@ var mask_ids: Array =[]
 
 #characters
 @onready var characters_container = get_node(\"%Characters\")
+var characters_to_defeat: int
+var defeated_characters: int
 
 #damaged vfx
 @onready var damaged_vfx: PlayerDamagedVfx = get_node(\"%PlayerDamagedVfx\")
@@ -31,6 +33,7 @@ func _ready():
 	setup_masks()
 	assign_mask_preferences()
 	player.player_manager.connect(\"player_damaged\", _on_player_damaged)
+	player.player_manager.connect(\"enemy_defeated\", _on_enemy_defeated)
 
 func setup_masks():
 	var mask_pickup = get_node(\"mask/Area3D\") 
@@ -57,9 +60,16 @@ func setup_mask(mask_pickup, mask_id: int):
 func assign_mask_preferences():
 	print(\"assigning mask preferences\")
 	var character_count: int = characters_container.get_child_count()
+	characters_to_defeat = character_count
 	var characters = characters_container.get_children()
 	for i in range(character_count):
 		characters[i].get_child(0).set_preferred_mask(mask_ids[i])
+		
+func _on_enemy_defeated():
+	defeated_characters += 1
+	if(defeated_characters >= characters_to_defeat):
+		player.player_manager.end_game(true)
+		
 "
 
 [sub_resource type="Environment" id="Environment_noarx"]
