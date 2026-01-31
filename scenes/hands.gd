@@ -1,11 +1,10 @@
 extends Control
 
+var item_visual: TextureRect
+var hand_visuals: TextureRect
+var interact_text: Label
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _ready():
+	item_visual = get_node("%ItemInHands") 
+	interact_text = get_node("%InteractLabel")
+	hand_visuals = get_node("%HandVisuals")

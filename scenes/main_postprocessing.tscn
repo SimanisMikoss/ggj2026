@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://bshe15mjjfn3s"]
+
+[ext_resource type="Shader" uid="uid://dxpc83dl1t2s7" path="res://shaders/main_postprocessing.gdshader" id="1_li7pg"]
+[ext_resource type="PackedScene" uid="uid://dpkhlaxg5302f" path="res://scenes/main.tscn" id="1_o7h0f"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4nl3t"]
+shader = ExtResource("1_li7pg")
+shader_parameter/change_color_depth = false
+shader_parameter/target_color_depth = 5
+shader_parameter/dithering = false
+shader_parameter/scale_resolution = false
+shader_parameter/target_resolution_scale = 3
+shader_parameter/enable_recolor = false
+
+[node name="SubViewportContainer" type="SubViewportContainer"]
+material = SubResource("ShaderMaterial_4nl3t")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+metadata/_edit_use_anchors_ = true
+
+[node name="SubViewport" type="SubViewport" parent="."]
+size = Vector2i(1920, 1080)
+
+[node name="Node3D" parent="SubViewport" instance=ExtResource("1_o7h0f")]

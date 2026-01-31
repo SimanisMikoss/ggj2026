@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-run/main_scene="uid://dpkhlaxg5302f"
+run/main_scene="uid://bshe15mjjfn3s"
 config/features=PackedStringArray("4.5")
 
 [display]

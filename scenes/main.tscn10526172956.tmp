@@ -1,29 +1,29 @@
-[gd_scene load_steps=9 format=3 uid="uid://dpkhlaxg5302f"]
+[gd_scene load_steps=12 format=3 uid="uid://dpkhlaxg5302f"]
 
-[ext_resource type="PackedScene" uid="uid://omqv7mfhrxun" path="res://scenes/buttons.tscn" id="1_ns6u7"]
-[ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="2_5t4e2"]
-[ext_resource type="PackedScene" uid="uid://dchona1b8dby6" path="res://scenes/reticle.tscn" id="2_a6664"]
-[ext_resource type="Sky" uid="uid://qjverwvwjhcs" path="res://new_sky.tres" id="2_xvgsr"]
-[ext_resource type="PackedScene" uid="uid://ddvbgfpqg0dbl" path="res://scenes/character.tscn" id="3_5t4e2"]
-[ext_resource type="PackedScene" uid="uid://db3nt221a4eel" path="res://scenes/mask.tscn" id="5_oqwcg"]
+[ext_resource type="Texture2D" uid="uid://boldaypwv4ghl" path="res://sprites_placeholder/mask1.png" id="1_85g3d"]
+[ext_resource type="Texture2D" uid="uid://bb1j48r8odwh5" path="res://sprites_placeholder/mask2.png" id="2_choun"]
+[ext_resource type="Texture2D" uid="uid://bfa4a6ryba07m" path="res://sprites_placeholder/mask3.png" id="3_ya4ey"]
+[ext_resource type="PackedScene" uid="uid://omqv7mfhrxun" path="res://scenes/buttons.tscn" id="4_eb6dy"]
+[ext_resource type="PackedScene" uid="uid://dchona1b8dby6" path="res://scenes/reticle.tscn" id="5_trceg"]
+[ext_resource type="Sky" uid="uid://qjverwvwjhcs" path="res://new_sky.tres" id="6_a8y0u"]
+[ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="7_jkv2x"]
+[ext_resource type="PackedScene" uid="uid://ddvbgfpqg0dbl" path="res://scenes/character.tscn" id="8_jbj1t"]
+[ext_resource type="PackedScene" uid="uid://db3nt221a4eel" path="res://scenes/mask.tscn" id="9_muem4"]
 
 [sub_resource type="GDScript" id="GDScript_oqwcg"]
 script/source = "extends Node3D
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+@export var mask_textures: Array[Texture2D]
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _ready():
+	var mask_pickup = get_node(\"mask/Area3D\") 
+	mask_pickup.change_visuals(mask_textures[2])
 "
 
 [sub_resource type="Environment" id="Environment_noarx"]
 background_mode = 2
-sky = ExtResource("2_xvgsr")
+sky = ExtResource("6_a8y0u")
 sky_rotation = Vector3(6.2831855, 6.2831855, -6.2831855)
 ambient_light_source = 3
 ambient_light_sky_contribution = 0.16
@@ -33,11 +33,12 @@ fog_sky_affect = 0.604
 
 [node name="Node3D" type="Node3D"]
 script = SubResource("GDScript_oqwcg")
+mask_textures = Array[Texture2D]([ExtResource("1_85g3d"), ExtResource("2_choun"), ExtResource("3_ya4ey")])
 
-[node name="buttons" parent="." instance=ExtResource("1_ns6u7")]
+[node name="buttons" parent="." instance=ExtResource("4_eb6dy")]
 visible = false
 
-[node name="Reticle" parent="." instance=ExtResource("2_a6664")]
+[node name="Reticle" parent="." instance=ExtResource("5_trceg")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_noarx")
@@ -68,11 +69,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.406399, 1.4687178, -14.37
 [node name="CSGCylinder3D5" type="CSGCylinder3D" parent="CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.935211, 1.4687178, -14.379812)
 
-[node name="ProtoController" parent="." instance=ExtResource("2_5t4e2")]
+[node name="ProtoController" parent="." instance=ExtResource("7_jkv2x")]
 transform = Transform3D(-0.022320963, -0.010486622, 0.99969584, -1.4551915e-11, 0.999945, 0.010489236, -0.99975085, 0.00023412984, -0.022319736, 0.86737657, 0.3452139, -1.732354)
 
-[node name="Character" parent="." instance=ExtResource("3_5t4e2")]
+[node name="Character" parent="." instance=ExtResource("8_jbj1t")]
 transform = Transform3D(-0.38097352, 0, 0.92458594, 0, 1, 0, -0.92458594, 0, -0.38097352, 12.292443, -0.28536224, -8.853405)
 
-[node name="mask" parent="." instance=ExtResource("5_oqwcg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.904313, 0.28071648, -1.7604704)
+[node name="Character2" parent="." instance=ExtResource("8_jbj1t")]
+transform = Transform3D(-0.38097352, 0, 0.92458594, 0, 1, 0, -0.92458594, 0, -0.38097352, 13.500236, -0.28536224, -5.9222093)
+
+[node name="mask" parent="." instance=ExtResource("9_muem4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.904313, 0.28071648, -1.9040127)

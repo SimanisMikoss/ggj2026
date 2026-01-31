@@ -1,0 +1,116 @@
+[gd_scene load_steps=14 format=3 uid="uid://dpkhlaxg5302f"]
+
+[ext_resource type="Texture2D" uid="uid://boldaypwv4ghl" path="res://sprites_placeholder/mask1.png" id="1_85g3d"]
+[ext_resource type="Texture2D" uid="uid://bb1j48r8odwh5" path="res://sprites_placeholder/mask2.png" id="2_choun"]
+[ext_resource type="Texture2D" uid="uid://bfa4a6ryba07m" path="res://sprites_placeholder/mask3.png" id="3_ya4ey"]
+[ext_resource type="PackedScene" uid="uid://omqv7mfhrxun" path="res://scenes/buttons.tscn" id="4_eb6dy"]
+[ext_resource type="PackedScene" uid="uid://dchona1b8dby6" path="res://scenes/reticle.tscn" id="5_trceg"]
+[ext_resource type="Sky" uid="uid://qjverwvwjhcs" path="res://new_sky.tres" id="6_a8y0u"]
+[ext_resource type="Texture2D" uid="uid://c3wqheovu4xx1" path="res://sprites_placeholder/pure-white-snow-surface.jpg" id="7_choun"]
+[ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="7_jkv2x"]
+[ext_resource type="PackedScene" uid="uid://ddvbgfpqg0dbl" path="res://scenes/character.tscn" id="8_jbj1t"]
+[ext_resource type="PackedScene" uid="uid://db3nt221a4eel" path="res://scenes/mask.tscn" id="9_muem4"]
+
+[sub_resource type="GDScript" id="GDScript_oqwcg"]
+script/source = "extends Node3D
+
+@export var mask_textures: Array[Texture2D]
+
+
+func _ready():
+	setup_masks()
+	assign_mask_preferences()
+	
+func setup_masks():
+	var mask_pickup = get_node(\"mask/Area3D\") 
+	var mask_pickup_2 = get_node(\"mask2/Area3D\") 
+	var mask_pickup_3 = get_node(\"mask3/Area3D\") 
+	var masks = [mask_pickup, mask_pickup_2, mask_pickup_3]
+	var mask_ids: Array
+	#create a list of ids
+	for i in range(masks.size()):
+		mask_ids.append(i)
+	mask_ids.shuffle()
+	
+	for i in range(masks.size()):
+		setup_mask(masks[i], mask_ids[i])
+
+func setup_mask(mask_pickup, mask_id: int):
+	mask_pickup.change_visuals(mask_textures[mask_id])
+
+func assign_mask_preferences():
+	print(\"assigning mask preferences\")
+"
+
+[sub_resource type="Environment" id="Environment_noarx"]
+background_mode = 2
+sky = ExtResource("6_a8y0u")
+sky_rotation = Vector3(6.2831855, 6.2831855, -6.2831855)
+ambient_light_source = 3
+ambient_light_sky_contribution = 0.16
+ambient_light_energy = 2.22
+tonemap_mode = 2
+fog_sky_affect = 0.604
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ya4ey"]
+albedo_texture = ExtResource("7_choun")
+
+[node name="Node3D" type="Node3D"]
+script = SubResource("GDScript_oqwcg")
+mask_textures = Array[Texture2D]([ExtResource("1_85g3d"), ExtResource("2_choun"), ExtResource("3_ya4ey")])
+
+[node name="buttons" parent="." instance=ExtResource("4_eb6dy")]
+visible = false
+
+[node name="Reticle" parent="." instance=ExtResource("5_trceg")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_noarx")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+light_color = Color(0.8557013, 0.897525, 0.9211354, 1)
+shadow_enabled = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5603838, -0.31928253, 2.2099247)
+use_collision = true
+size = Vector3(140.2023, 0, 102.38484)
+material = SubResource("StandardMaterial3D_ya4ey")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5956671, 1.0165386, 0)
+height = 1.0336914
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4687178, 0)
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.406399, 1.4687178, 0)
+
+[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.406399, 1.4687178, -14.379812)
+
+[node name="CSGCylinder3D5" type="CSGCylinder3D" parent="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.935211, 1.4687178, -14.379812)
+
+[node name="ProtoController" parent="." instance=ExtResource("7_jkv2x")]
+transform = Transform3D(-0.022320963, -0.010486622, 0.99969584, -1.4551915e-11, 0.999945, 0.010489236, -0.99975085, 0.00023412984, -0.022319736, 0.86737657, 0.3452139, -1.732354)
+
+[node name="mask" parent="." instance=ExtResource("9_muem4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.904313, 0.28071648, -1.9040127)
+
+[node name="mask2" parent="." instance=ExtResource("9_muem4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.904313, 0.28071648, 2.1982665)
+
+[node name="mask3" parent="." instance=ExtResource("9_muem4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.904313, 0.28071648, 6.4968534)
+
+[node name="Characters" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="Character" parent="Characters" instance=ExtResource("8_jbj1t")]
+transform = Transform3D(-0.38097352, 0, 0.92458594, 0, 1, 0, -0.92458594, 0, -0.38097352, 12.292443, -0.28536224, -8.853405)
+
+[node name="Character2" parent="Characters" instance=ExtResource("8_jbj1t")]
+transform = Transform3D(-0.38097352, 0, 0.92458594, 0, 1, 0, -0.92458594, 0, -0.38097352, 13.500236, -0.28536224, -5.9222093)

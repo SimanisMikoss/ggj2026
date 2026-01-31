@@ -6,6 +6,8 @@ var interactable: bool = true
 var target_node : Node3D 
 var character_mask: Sprite3D
 
+var preferred_mask_id: int
+
 func _ready():
 	character_mask = get_node("%CharacterMask") 
 	target_node = get_node("%HeadText") 
@@ -42,3 +44,6 @@ func equip_mask(mask: Node3D):
 	character_mask.texture = mask.mask_texture
 	character_mask.visible = true
 	
+func set_preferred_mask(mask_id: int):
+	preferred_mask_id = mask_id
+	print("set preferred mask id")
