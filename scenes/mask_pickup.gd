@@ -4,9 +4,10 @@ extends Area3D
 
 #stats
 var interactable: bool = true
+var mask_texture: Texture2D
 
 #references
-var target_node : Node3D 
+var target_node : Sprite3D 
 var interact_text: Label3D
 var collision_shape: CollisionShape3D
 
@@ -14,10 +15,11 @@ func _ready():
 	interactable = true
 	interact_text = get_node("%InteractText") 
 	target_node = get_node("%MaskPickupSprite") 
-	collision_shape = get_node("collision_shape")
+	mask_texture = target_node.texture
+	collision_shape = get_node("CollisionShape3D")
 	
-func show_interact_prompt(show: bool):
-	interact_text.visible = show;
+func show_interact_prompt(show_prompt: bool):
+	interact_text.visible = show_prompt;
 	
 func process_raycast_change(hit: bool):
 	if hit == true and interactable == true:
@@ -33,6 +35,7 @@ func interact(interactor: Node3D):
 	enable_interactions(false)
 	#PICK UP MASK ON PLAYER
 	self.reparent(interactor, true)
+	interactor.pickup_mask(self)
 	self.position += pickup_offset
 
 func enable_interactions(enable: bool):

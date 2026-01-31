@@ -1,0 +1,47 @@
+[gd_scene load_steps=4 format=3 uid="uid://dj1lqefdhjlsm"]
+
+[ext_resource type="Script" uid="uid://o6owjpx0tw8c" path="res://scenes/hands.gd" id="1_sfe0i"]
+[ext_resource type="Texture2D" uid="uid://cvad8hosf37rs" path="res://sprites_placeholder/hands.png" id="1_vrxs6"]
+[ext_resource type="Texture2D" uid="uid://boldaypwv4ghl" path="res://sprites_placeholder/mask1.png" id="2_kiutv"]
+
+[node name="Hands" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+script = ExtResource("1_sfe0i")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("1_vrxs6")
+
+[node name="ItemInHands" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -166.0
+offset_top = -279.0
+offset_right = 192.98328
+offset_bottom = -98.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("2_kiutv")

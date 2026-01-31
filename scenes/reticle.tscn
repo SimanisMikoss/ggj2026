@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dchona1b8dby6"]
 
-[ext_resource type="Texture2D" uid="uid://or88i2g8523i" path="res://sprites/white pixel.png" id="1_gat08"]
+[ext_resource type="Texture2D" uid="uid://or88i2g8523i" path="res://sprites_placeholder/white pixel.png" id="1_gat08"]
 
 [node name="Reticle" type="Control"]
 layout_mode = 3

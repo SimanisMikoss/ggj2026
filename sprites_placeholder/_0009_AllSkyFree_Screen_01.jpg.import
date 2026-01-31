@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bb1j48r8odwh5"
-path.s3tc="res://.godot/imported/mask2.png-5dbc29db5c0105f81fca3b83dc21f468.s3tc.ctex"
+uid="uid://bdr4yi1kqi3mg"
+path.s3tc="res://.godot/imported/_0009_AllSkyFree_Screen_01.jpg-fc2e38022457b2f7af029ab87d50c273.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://sprites/mask2.png"
-dest_files=["res://.godot/imported/mask2.png-5dbc29db5c0105f81fca3b83dc21f468.s3tc.ctex"]
+source_file="res://sprites_placeholder/_0009_AllSkyFree_Screen_01.jpg"
+dest_files=["res://.godot/imported/_0009_AllSkyFree_Screen_01.jpg-fc2e38022457b2f7af029ab87d50c273.s3tc.ctex"]
 
 [params]
 
