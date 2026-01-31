@@ -1,4 +1,5 @@
 extends Camera3D
+class_name CameraController
 
 @export var ray_length := 200.0
 var has_valid_interactable: bool = false
@@ -35,6 +36,7 @@ func check_for_interactable():
 		if collider.has_method("interact"):
 			if (has_valid_interactable):
 				interactable.process_raycast_change(false)
+				try_show_interact_label(false)
 			has_valid_interactable = true
 			interactable = collider
 			interactable.process_raycast_change(true)

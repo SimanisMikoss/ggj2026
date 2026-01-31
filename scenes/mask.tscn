@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://db3nt221a4eel"]
 
-[ext_resource type="Script" uid="uid://wtg3wwoaoflp" path="res://scenes/mask_parent.gd" id="1_0d8jk"]
+[ext_resource type="Script" uid="uid://wtg3wwoaoflp" path="res://scripts/mask_parent.gd" id="1_0d8jk"]
 [ext_resource type="Texture2D" uid="uid://boldaypwv4ghl" path="res://sprites_placeholder/mask1.png" id="1_b0qmb"]
-[ext_resource type="Script" uid="uid://byedpys8gjuah" path="res://scenes/mask_pickup.gd" id="1_rv8xw"]
+[ext_resource type="Script" uid="uid://byedpys8gjuah" path="res://scripts/mask_pickup.gd" id="1_rv8xw"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_b0qmb"]
 radius = 0.9333191
@@ -12,6 +12,7 @@ height = 1.8666382
 script = ExtResource("1_0d8jk")
 
 [node name="Area3D" type="Area3D" parent="."]
+collision_layer = 4
 script = ExtResource("1_rv8xw")
 
 [node name="MaskPickupSprite" type="Sprite3D" parent="Area3D"]

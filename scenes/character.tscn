@@ -1,26 +1,25 @@
-[gd_scene load_steps=5 format=3 uid="uid://ddvbgfpqg0dbl"]
+[gd_scene load_steps=6 format=3 uid="uid://ddvbgfpqg0dbl"]
 
-[ext_resource type="Texture2D" uid="uid://dnxekqy5t4rsq" path="res://sprites_placeholder/man prototype.png" id="1_agfs1"]
-[ext_resource type="Script" uid="uid://bji8r3p72qylt" path="res://scenes/character_interaction.gd" id="2_rkhd4"]
+[ext_resource type="Script" uid="uid://bji8r3p72qylt" path="res://scripts/character_interaction.gd" id="2_rkhd4"]
 [ext_resource type="Texture2D" uid="uid://bb1j48r8odwh5" path="res://sprites_placeholder/mask2.png" id="3_lrhn5"]
+[ext_resource type="PackedScene" uid="uid://cukr34u5i33gj" path="res://scenes/character_visuals.tscn" id="3_my7n2"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rkhd4"]
 radius = 0.5654297
 height = 2.633789
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_lrhn5"]
+radius = 3.514386
+
 [node name="Character" type="Node3D"]
 
 [node name="Area3D" type="Area3D" parent="."]
+collision_layer = 2
 script = ExtResource("2_rkhd4")
 
-[node name="Sprite3D" type="Sprite3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0260794, 0)
-billboard = 2
-texture = ExtResource("1_agfs1")
-
-[node name="CharacterMask" type="Sprite3D" parent="Area3D/Sprite3D"]
+[node name="CharacterMask" type="Sprite3D" parent="Area3D"]
 unique_name_in_owner = true
-transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0.86800003, 0.016803384)
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 1.8940794, 0.016803384)
 billboard = 2
 texture = ExtResource("3_lrhn5")
 
@@ -35,3 +34,14 @@ visible = false
 pixel_size = 0.01
 billboard = 1
 text = "HELLO"
+
+[node name="CharacterVisuals" parent="Area3D" instance=ExtResource("3_my7n2")]
+unique_name_in_owner = true
+
+[node name="PlayerDetectionArea" type="Area3D" parent="Area3D"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8099569, 0)
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D/PlayerDetectionArea"]
+shape = SubResource("SphereShape3D_lrhn5")

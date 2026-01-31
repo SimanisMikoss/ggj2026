@@ -19,9 +19,10 @@ script/source = "extends Node3D
 var mask_ids: Array =[]
 
 #characters
-@onready var characters_container = get_node(\"%Characters\")
+var characters_container: Node3D
 
 func _ready():
+	characters_container.get_node(\"%Characters\")
 	setup_masks()
 	assign_mask_preferences()
 	
@@ -41,14 +42,13 @@ func setup_masks():
 
 func setup_mask(mask_pickup, mask_id: int):
 	mask_pickup.change_visuals(mask_textures[mask_id])
-	mask_pickup.mask_id = mask_id
 
 func assign_mask_preferences():
 	print(\"assigning mask preferences\")
 	var character_count: int = characters_container.get_child_count()
 	var characters = characters_container.get_children()
 	for i in range(character_count):
-		characters[i].get_child(0).set_preferred_mask(mask_ids[i])
+		characters[i].set_preferred_mask(mask_ids[i])
 "
 
 [sub_resource type="Environment" id="Environment_noarx"]
@@ -119,10 +119,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.904313, 0.28071648, 6.49685
 unique_name_in_owner = true
 
 [node name="Character" parent="Characters" instance=ExtResource("8_jbj1t")]
-transform = Transform3D(-0.38097352, 0, 0.92458594, 0, 1, 0, -0.92458594, 0, -0.38097352, 13.247049, -0.28536224, -9.718271)
+transform = Transform3D(-0.38097352, 0, 0.92458594, 0, 1, 0, -0.92458594, 0, -0.38097352, 12.292443, -0.28536224, -8.853405)
 
 [node name="Character2" parent="Characters" instance=ExtResource("8_jbj1t")]
 transform = Transform3D(-0.38097352, 0, 0.92458594, 0, 1, 0, -0.92458594, 0, -0.38097352, 13.500236, -0.28536224, -5.9222093)
-
-[node name="Character3" parent="Characters" instance=ExtResource("8_jbj1t")]
-transform = Transform3D(-0.38097352, 0, 0.92458594, 0, 1, 0, -0.92458594, 0, -0.38097352, 15.03549, -0.28536224, -2.1962996)
