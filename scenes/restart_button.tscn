@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://cpjqgy1oon0so"]
+
+[ext_resource type="Script" uid="uid://5sqewr0xs6oy" path="res://restart_button.gd" id="1_wbttw"]
+
+[node name="RestartButton" type="Button"]
+custom_minimum_size = Vector2(200, 60)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = 13.5
+offset_right = 100.0
+offset_bottom = 83.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Retry"
+script = ExtResource("1_wbttw")

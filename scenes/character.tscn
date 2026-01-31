@@ -41,7 +41,7 @@ unique_name_in_owner = true
 [node name="PlayerDetectionArea" type="Area3D" parent="Area3D"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8099569, 0)
-collision_layer = 2
+collision_layer = 7
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D/PlayerDetectionArea"]
 shape = SubResource("SphereShape3D_lrhn5")

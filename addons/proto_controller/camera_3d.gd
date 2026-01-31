@@ -1,6 +1,7 @@
 extends Camera3D
 class_name CameraController
 
+var end_screen = preload("res://scenes/end_screen.tscn")
 @export var ray_length := 200.0
 var has_valid_interactable: bool = false
 var interactable
@@ -8,17 +9,34 @@ var interactable
 var hands
 
 var has_mask: bool = false
-var item_in_hands
+var item_in_hands: MaskPickup
 var item_in_hands_visual: TextureRect
+
+var player_life: int
+var player_max_life: int = 100
 
 func _ready():
 	hands = get_node("%Hands") 
+	player_life = player_max_life
 	show_hands(false)
 
 func _physics_process(_delta):
 	check_for_interactable()
 	if Input.is_action_just_pressed("interact"):
 		interact()
+		
+func damage_player(amount: int):
+	print("taking damage amount:", amount)
+	player_life -= amount
+	if (player_life <= 0):
+		player_life = 0
+		print("game over")
+		end_game()
+		
+func end_game():
+	Global.input_allowed = false
+	var end_screen_instance = end_screen.instantiate()
+	add_child(end_screen_instance)
 
 func check_for_interactable():
 	var mouse_pos = get_viewport().get_mouse_position()
@@ -93,4 +111,9 @@ func try_drop_mask():
 	show_hands(false)
 	item_in_hands.visible = true
 	item_in_hands.drop()
+	
+func is_carrying_right_mask(required_mask_id: int)-> bool:
+	if (has_mask and item_in_hands.mask_id == required_mask_id):
+		return true
+	return false
 	

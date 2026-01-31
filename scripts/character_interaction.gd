@@ -34,7 +34,7 @@ func _on_body_exited(body: Node3D) -> void:
 		target_node.process_mode = Node.PROCESS_MODE_DISABLED
 		
 func on_player_entered(body: Node3D)-> void:
-	if (body.has_method("temp") and body.has_mask):
+	if (body.has_method("temp") and body.player_manager.is_carrying_right_mask(preferred_mask_id) == false):
 		body.temp()
 		visuals.change_animation("angry")
 	print("player detected in monster zone")
@@ -55,13 +55,14 @@ func interact(interactor: Node3D):
 func try_equip_mask(player: Node3D, mask: Node3D):
 	if (mask.mask_id != preferred_mask_id):
 		print("i don't like this mask with id", mask.mask_id, ",i want ", preferred_mask_id)
+		player.damage_player(33)
 		return;
 	else:
 		player.remove_mask(self)
 	
 func equip_mask(mask: Node3D):
 	interactable = false
-	visuals.change_animation("angry")
+	visuals.change_animation("default")
 	character_mask.texture = mask.mask_texture
 	character_mask.visible = true
 	

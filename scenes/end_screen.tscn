@@ -1,0 +1,77 @@
+[gd_scene load_steps=4 format=3 uid="uid://cmf521sppja8e"]
+
+[ext_resource type="Script" uid="uid://c55knttoqvslw" path="res://end_screen.gd" id="1_6e1uj"]
+[ext_resource type="Texture2D" uid="uid://b8d1r86lfnvrn" path="res://sprites_placeholder/dead screen.png" id="2_jc7ji"]
+[ext_resource type="PackedScene" uid="uid://cpjqgy1oon0so" path="res://scenes/restart_button.tscn" id="3_jc7ji"]
+
+[node name="EndScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_6e1uj")
+
+[node name="Victory" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_jc7ji")
+
+[node name="Label" type="Label" parent="Victory"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -69.25
+offset_top = -31.75
+offset_right = 69.25
+offset_bottom = 31.75
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.3230395, 0.53869957, 0.46763545, 1)
+theme_override_font_sizes/font_size = 117
+text = "SURVIVED"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RestartButton" parent="Victory/Label" instance=ExtResource("3_jc7ji")]
+layout_mode = 1
+
+[node name="Defeat" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_jc7ji")
+
+[node name="Label" type="Label" parent="Defeat"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -69.25
+offset_top = -31.75
+offset_right = 69.25
+offset_bottom = 31.75
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.6839237, 0.22513628, 0.26577556, 1)
+theme_override_font_sizes/font_size = 117
+text = "DEATH"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RestartButton2" parent="Defeat/Label" instance=ExtResource("3_jc7ji")]
+layout_mode = 1

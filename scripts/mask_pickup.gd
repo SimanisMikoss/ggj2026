@@ -1,5 +1,5 @@
 extends Area3D
-
+class_name MaskPickup
 var mask_id
 @export var pickup_offset: Vector3
 
@@ -54,7 +54,6 @@ func interact(interactor: Node3D):
 		return
 	enable_interactions(false)
 	#PICK UP MASK ON PLAYER
-	#self.reparent(interactor, true)
 	interactor.pickup_mask(self)
 	self.position += pickup_offset
 
@@ -72,8 +71,5 @@ func change_visuals(new_texture: Texture2D):
 func drop():
 	print("mask is dropped")
 	enable_interactions(true)
-	#var parent: Node3D = get_parent()
 	#parent.remove_child(self)
 	target_node.visible = true
-	#self.reparent(original_parent, true)
-	#self.global_position = parent.position
