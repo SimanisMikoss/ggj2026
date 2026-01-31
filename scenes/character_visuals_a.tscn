@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=3 uid="uid://bnh3l4sqeo2i0"]
+
+[ext_resource type="Texture2D" uid="uid://bvr08je8xa7f0" path="res://sprites/mons1_angy1 (20260131083740).png" id="1_bh5hy"]
+[ext_resource type="Texture2D" uid="uid://cojcvlj7yi2y0" path="res://sprites/mons1_angy2 (20260131090720).png" id="2_y6kol"]
+[ext_resource type="Texture2D" uid="uid://7bx801yoii6r" path="res://sprites/mons1_default (20260131083719).png" id="3_3wbjc"]
+[ext_resource type="Texture2D" uid="uid://dj7vb54vorb22" path="res://sprites/mons1_attac (20260131100419).png" id="3_y6kol"]
+[ext_resource type="Texture2D" uid="uid://dnxekqy5t4rsq" path="res://sprites_placeholder/man prototype.png" id="5_d26n6"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lrhn5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_bh5hy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_y6kol")
+}],
+"loop": true,
+"name": &"angry",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_y6kol")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_y6kol")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_bh5hy")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_3wbjc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="CharacterVisuals_A" type="AnimatedSprite3D"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+billboard = 2
+sprite_frames = SubResource("SpriteFrames_lrhn5")
+animation = &"attack"
+autoplay = "default"
+frame = 1
+frame_progress = 1.0
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+texture = ExtResource("5_d26n6")

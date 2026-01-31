@@ -4,7 +4,7 @@
 # Happy prototyping!
 
 extends CharacterBody3D
-
+class_name ProtoController
 ## Can we move around?
 @export var can_move : bool = true
 ## Are we affected by gravity?

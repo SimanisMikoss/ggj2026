@@ -12,8 +12,10 @@ var has_mask: bool = false
 var item_in_hands: MaskPickup
 var item_in_hands_visual: TextureRect
 
+#health
 var player_life: int
 var player_max_life: int = 100
+signal player_damaged()
 
 func _ready():
 	hands = get_node("%Hands") 
@@ -30,6 +32,7 @@ func damage_player(amount: int):
 		return
 	print("taking damage amount:", amount)
 	player_life -= amount
+	player_damaged.emit()
 	if (player_life <= 0):
 		player_life = 0
 		print("game over")

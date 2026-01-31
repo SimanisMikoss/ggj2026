@@ -55,6 +55,7 @@ func interact(interactor: Node3D):
 func try_equip_mask(player: Node3D, mask: Node3D):
 	if (mask.mask_id != preferred_mask_id):
 		print("i don't like this mask with id", mask.mask_id, ",i want ", preferred_mask_id)
+		visuals.change_animation("attack")
 		player.damage_player(33)
 		return;
 	else:

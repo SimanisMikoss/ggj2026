@@ -23,15 +23,12 @@ var mask_ids: Array =[]
 @onready var characters_container = get_node(\"%Characters\")
 
 #damaged vfx
-@onready var damaged_vfx: PlayerDamagedVfx = get_node(\"%PlayerDamagedVfx\")
-
-@onready var player: ProtoController = get_node(\"%ProtoController\")
+#@onready var 
 
 func _ready():
 	setup_masks()
 	assign_mask_preferences()
-	player.player_manager.connect(\"player_damaged\", _on_player_damaged)
-
+	
 func setup_masks():
 	var mask_pickup = get_node(\"mask/Area3D\") 
 	var mask_pickup_2 = get_node(\"mask2/Area3D\") 
@@ -45,10 +42,6 @@ func setup_masks():
 		setup_mask(masks[y], mask_ids[y])
 	#shuffle again so monster characters don't have preferences in the same order as masks
 	mask_ids.shuffle() 
-
-func _on_player_damaged():
-	print(\"should play damaged vfx\")
-	damaged_vfx.play_damaged_vfx()
 
 func setup_mask(mask_pickup, mask_id: int):
 	mask_pickup.change_visuals(mask_textures[mask_id])
@@ -82,7 +75,6 @@ mask_textures = Array[Texture2D]([ExtResource("1_85g3d"), ExtResource("2_choun")
 [node name="buttons" parent="." instance=ExtResource("4_eb6dy")]
 
 [node name="PlayerDamagedVfx" parent="." instance=ExtResource("5_ya4ey")]
-unique_name_in_owner = true
 
 [node name="Reticle" parent="." instance=ExtResource("5_trceg")]
 
@@ -117,7 +109,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.406399, 1.4687178, -14.37
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.935211, 1.4687178, -14.379812)
 
 [node name="ProtoController" parent="." instance=ExtResource("7_jkv2x")]
-unique_name_in_owner = true
 transform = Transform3D(-0.022320963, -0.010486622, 0.99969584, -1.4551915e-11, 0.999945, 0.010489236, -0.99975085, 0.00023412984, -0.022319736, 0.86737657, 0.3452139, -1.732354)
 
 [node name="mask" parent="." instance=ExtResource("9_muem4")]
