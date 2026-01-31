@@ -54,18 +54,24 @@ var freeflying : bool = false
 @onready var collider: CollisionShape3D = $Collider
 
 @onready var player_manager : CameraController = get_node("%Camera3D")
+var game_ended: bool = false
 
 func temp():
 	print("temp")
 
 func _ready() -> void:
 	check_input_mappings()
+	Global.game_ended.connect(_on_game_ended)
 	look_rotation.y = rotation.y
 	look_rotation.x = head.rotation.x
+	
+func _on_game_ended():
+	game_ended = true
+	release_mouse()
 
 func _unhandled_input(event: InputEvent) -> void:
 	# Mouse capturing
-	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and game_ended == false:
 		capture_mouse()
 	if Input.is_key_pressed(KEY_ESCAPE):
 		release_mouse()

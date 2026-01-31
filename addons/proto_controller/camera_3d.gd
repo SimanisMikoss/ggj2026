@@ -26,6 +26,8 @@ func _physics_process(_delta):
 		interact()
 		
 func damage_player(amount: int):
+	if (player_life <= 0):
+		return
 	print("taking damage amount:", amount)
 	player_life -= amount
 	if (player_life <= 0):
