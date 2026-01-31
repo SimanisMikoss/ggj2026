@@ -69,10 +69,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.406399, 1.4687178, -14.37
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.935211, 1.4687178, -14.379812)
 
 [node name="ProtoController" parent="." instance=ExtResource("2_5t4e2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.86737657, 0.3452139, -1.732354)
+transform = Transform3D(-0.022320963, -0.010486622, 0.99969584, -1.4551915e-11, 0.999945, 0.010489236, -0.99975085, 0.00023412984, -0.022319736, 0.86737657, 0.3452139, -1.732354)
 
 [node name="Character" parent="." instance=ExtResource("3_5t4e2")]
 transform = Transform3D(-0.38097352, 0, 0.92458594, 0, 1, 0, -0.92458594, 0, -0.38097352, 12.292443, -0.28536224, -8.853405)
 
 [node name="mask" parent="." instance=ExtResource("5_oqwcg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.986848, 0.28071648, 4.9750214)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.904313, 0.28071648, -1.7604704)
