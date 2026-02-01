@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://ddvbgfpqg0dbl"]
+[gd_scene load_steps=8 format=3 uid="uid://ddvbgfpqg0dbl"]
 
-[ext_resource type="Texture2D" uid="uid://c2br6gaubkpdc" path="res://sprites/masking1a.png" id="2_lrhn5"]
+[ext_resource type="Texture2D" uid="uid://jlavyftu7eax" path="res://sprites/masking2.png" id="2_my7n2"]
 [ext_resource type="Script" uid="uid://bji8r3p72qylt" path="res://scripts/character_interaction.gd" id="2_rkhd4"]
 [ext_resource type="Script" uid="uid://bcb7egb1itya1" path="res://character_mask.gd" id="3_dp8ca"]
 [ext_resource type="PackedScene" uid="uid://cukr34u5i33gj" path="res://scenes/character_visuals.tscn" id="3_my7n2"]
+[ext_resource type="AudioStream" uid="uid://c46cc7w5p1ows" path="res://audio/angry.wav" id="5_dp8ca"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rkhd4"]
 radius = 0.5654297
@@ -18,6 +19,8 @@ radius = 3.514386
 collision_layer = 2
 script = ExtResource("2_rkhd4")
 damage_player_delay = 0.06
+follow_speed = 2.0
+offset = Vector3(0, -1.1, -2)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.892334, 0)
@@ -32,15 +35,16 @@ billboard = 1
 text = "HELLO"
 
 [node name="MaskParent" type="Node3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.012, 2.291, 0)
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0.012, 2.091, 0)
 
 [node name="CharacterMask" type="Sprite3D" parent="Area3D/MaskParent"]
 unique_name_in_owner = true
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 billboard = 2
-texture = ExtResource("2_lrhn5")
+texture = ExtResource("2_my7n2")
 script = ExtResource("3_dp8ca")
-max_distance = 0.5
+follow_speed = 4.0
+max_distance = 0.3
 
 [node name="CharacterVisuals" parent="Area3D" instance=ExtResource("3_my7n2")]
 unique_name_in_owner = true
@@ -53,5 +57,9 @@ collision_layer = 7
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D/PlayerDetectionArea"]
 shape = SubResource("SphereShape3D_lrhn5")
 
-[node name="DamageDelayTimer" type="Timer" parent="Area3D"]
-unique_name_in_owner = true
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Area3D"]
+stream = ExtResource("5_dp8ca")
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="Area3D"]
+transform = Transform3D(1.465, 0, 0, 0, 1.465, 0, 0, 0, 1.465, 0, 1.9625812, -0.20177913)
+aabb = AABB(-0.30817312, -0.32642397, -0.029984072, 0.61634624, 0.65284795, 0.26016346)

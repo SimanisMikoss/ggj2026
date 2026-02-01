@@ -1,15 +1,16 @@
 extends Sprite3D
 class_name CharacterMask
 
-@export var follow_speed := 6.0
-@export var max_distance := 10.0
+@export var follow_speed :float
+@export var max_distance : float
 
 var player
 var follow_player: bool = false
 @onready var parent_node: Node3D = get_parent()
 
-func start_follow_player(player_to_follow):
+func start_follow_player(player_to_follow, mask_pickup: MaskPickup):
 	player = player_to_follow
+	parent_node.global_position += mask_pickup.mask_offset_on_character
 	follow_player = true
 
 func _physics_process(delta):

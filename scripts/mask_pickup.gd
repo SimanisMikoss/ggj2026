@@ -9,6 +9,7 @@ var has_timer: bool = false
 #stats
 var interactable: bool = true
 var mask_texture: Texture2D
+var mask_offset_on_character: Vector3
 
 #references
 var target_node : Sprite3D 

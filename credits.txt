@@ -1,1 +1,9 @@
+tree
 https://assetstore.unity.com/packages/3d/vegetation/the-illustrated-nature-sample-161188
+
+audio:
+https://pixabay.com/music/ambient-sinius-cold-spots-and-spirit-portals-paranormal-activity-388274/
+https://pixabay.com/sound-effects/nature-steps-on-snow-30305/
+
+potential:
+https://assetstore.unity.com/packages/3d/vegetation/scan-stump-vol-1-196185

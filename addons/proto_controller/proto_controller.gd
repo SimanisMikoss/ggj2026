@@ -20,7 +20,7 @@ class_name ProtoController
 ## Look around rotation speed.
 @export var look_speed : float = 0.002
 ## Normal speed.
-@export var base_speed : float = 7.0
+@export var base_speed : float = 6.5
 ## Speed of jump.
 @export var jump_velocity : float = 4.5
 ## How fast do we run?
@@ -56,12 +56,18 @@ var freeflying : bool = false
 @onready var player_manager : CameraController = get_node("%Camera3D")
 var game_ended: bool = false
 
+var footsteps_audio_player: AudioStreamPlayer3D
+var is_playing_footsteps: bool = false
+var walk_duration : float = 0
+var min_walk_duration: float = 0.25
+
 func temp():
 	print("temp")
 
 func _ready() -> void:
 	check_input_mappings()
 	Global.game_ended.connect(_on_game_ended)
+	footsteps_audio_player = get_node("%FootStepAudio")
 	look_rotation.y = rotation.y
 	look_rotation.x = head.rotation.x
 	
@@ -124,13 +130,26 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity.x = move_toward(velocity.x, 0, move_speed)
 			velocity.z = move_toward(velocity.z, 0, move_speed)
+			toggle_footstep_sound(true, delta)
 	else:
+		toggle_footstep_sound(false, delta)
 		velocity.x = 0
 		velocity.y = 0
 	
 	# Use velocity to actually move
 	move_and_slide()
 
+func toggle_footstep_sound(moving: bool, delta: float):
+	if moving == true and is_playing_footsteps == false and not freeflying:
+		walk_duration += delta
+		if (walk_duration >= min_walk_duration):
+			footsteps_audio_player.play()
+	if moving == false and is_playing_footsteps == true:
+		walk_duration = 0
+		footsteps_audio_player.stop()
+	if (freeflying== true):
+		walk_duration = 0
+		footsteps_audio_player.stop()
 
 ## Rotate us to look around.
 ## Base of controller rotates around y (left/right). Head rotates around x (up/down).

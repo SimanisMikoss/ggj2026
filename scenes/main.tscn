@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://dpkhlaxg5302f"]
+[gd_scene load_steps=16 format=3 uid="uid://dpkhlaxg5302f"]
 
 [ext_resource type="Texture2D" uid="uid://c2br6gaubkpdc" path="res://sprites/masking1a.png" id="1_ya4ey"]
 [ext_resource type="Texture2D" uid="uid://bh45h53o8d5eu" path="res://sprites/masking1b.png" id="2_eb6dy"]
+[ext_resource type="Texture2D" uid="uid://jlavyftu7eax" path="res://sprites/masking2.png" id="3_eb6dy"]
 [ext_resource type="PackedScene" uid="uid://dchona1b8dby6" path="res://scenes/reticle.tscn" id="5_trceg"]
 [ext_resource type="PackedScene" uid="uid://gikw6idfe8r8" path="res://scenes/player_damaged_vfx.tscn" id="5_ya4ey"]
 [ext_resource type="Sky" uid="uid://qjverwvwjhcs" path="res://new_sky.tres" id="6_a8y0u"]
@@ -17,12 +18,15 @@ script/source = "extends Node3D
 
 #masks
 @export var mask_textures: Array[Texture2D]
+@export var mask_offsets: Array[Vector3]
 var mask_ids: Array =[]
 
 #characters
 @onready var characters_container = get_node(\"%Characters\")
 var characters_to_defeat: int
 var defeated_characters: int
+var max_enemies_following_player:int= 1
+var current_enemies_following_player:int = 0
 
 #damaged vfx
 @onready var damaged_vfx: PlayerDamagedVfx = get_node(\"%PlayerDamagedVfx\")
@@ -36,9 +40,9 @@ func _ready():
 	player.player_manager.connect(\"enemy_defeated\", _on_enemy_defeated)
 
 func setup_masks():
-	var mask_pickup = get_node(\"mask/Area3D\") 
-	var mask_pickup_2 = get_node(\"mask2/Area3D\") 
-	var mask_pickup_3 = get_node(\"mask3/Area3D\") 
+	var mask_pickup: MaskPickup = get_node(\"mask/Area3D\") 
+	var mask_pickup_2: MaskPickup  = get_node(\"mask2/Area3D\") 
+	var mask_pickup_3: MaskPickup  = get_node(\"mask3/Area3D\") 
 	var masks = [mask_pickup, mask_pickup_2, mask_pickup_3]
 	#create a list of ids
 	for i in range(masks.size()):
@@ -56,6 +60,7 @@ func _on_player_damaged():
 func setup_mask(mask_pickup, mask_id: int):
 	mask_pickup.change_visuals(mask_textures[mask_id])
 	mask_pickup.mask_id = mask_id
+	mask_pickup.mask_offset_on_character = mask_offsets[mask_id]
 
 func assign_mask_preferences():
 	print(\"assigning mask preferences\")
@@ -63,8 +68,21 @@ func assign_mask_preferences():
 	characters_to_defeat = character_count
 	var characters = characters_container.get_children()
 	for i in range(character_count):
-		characters[i].get_child(0).set_preferred_mask(mask_ids[i])
+		var character = characters[i].get_child(0)
+		character.set_preferred_mask(mask_ids[i])	
+		character.player_controller = player.player_manager
+		character.wants_to_follow_player.connect(_on_want_to_follow_player)
+		character.stop_follow_player.connect(_on_stop_follow_player)
 		
+func _on_want_to_follow_player(character: CharacterInteraction):
+	if (current_enemies_following_player >= max_enemies_following_player):
+		return		
+	character.follow_player(true)
+	current_enemies_following_player+=1
+		
+func _on_stop_follow_player():
+	current_enemies_following_player -= 1
+
 func _on_enemy_defeated():
 	defeated_characters += 1
 	if(defeated_characters >= characters_to_defeat):
@@ -88,7 +106,8 @@ albedo_texture = ExtResource("7_choun")
 
 [node name="Node3D" type="Node3D"]
 script = SubResource("GDScript_oqwcg")
-mask_textures = Array[Texture2D]([ExtResource("2_eb6dy"), ExtResource("1_ya4ey"), ExtResource("2_eb6dy")])
+mask_textures = Array[Texture2D]([ExtResource("2_eb6dy"), ExtResource("1_ya4ey"), ExtResource("3_eb6dy")])
+mask_offsets = Array[Vector3]([Vector3(0, 0.1, 0), Vector3(0, 0, 0), Vector3(-0.05, -0.1, 0)])
 
 [node name="PlayerDamagedVfx" parent="." instance=ExtResource("5_ya4ey")]
 unique_name_in_owner = true
@@ -192,11 +211,20 @@ material = SubResource("StandardMaterial3D_ya4ey")
 [node name="IL3DN_Tree_Pine_01_OneMesh" parent="Trees" instance=ExtResource("11_eb6dy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.4690223, 0.18115556, -14.712027)
 
+[node name="IL3DN_Tree_Pine_01_OneMesh3" parent="Trees" instance=ExtResource("11_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.4690223, 0.18115556, -45.9638)
+
+[node name="IL3DN_Tree_Pine_01_OneMesh4" parent="Trees" instance=ExtResource("11_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -54.811306, 0.18115556, -19.076008)
+
 [node name="IL3DN_Tree_Pine_01_OneMesh2" parent="Trees" instance=ExtResource("11_eb6dy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.227123, 0.18115556, -14.712027)
 
 [node name="IL3DN_Tree_Pine_03_OneMesh" parent="Trees" instance=ExtResource("12_trceg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.250745, 0.18066722, -11.078859)
+
+[node name="IL3DN_Tree_Pine_03_OneMesh4" parent="Trees" instance=ExtResource("12_trceg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 83.59389, 0.18066722, -11.078859)
 
 [node name="IL3DN_Tree_Pine_03_OneMesh3" parent="Trees" instance=ExtResource("12_trceg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.250745, 0.18066722, 20.673283)

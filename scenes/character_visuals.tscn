@@ -1,48 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://cukr34u5i33gj"]
+[gd_scene load_steps=3 format=3 uid="uid://cukr34u5i33gj"]
 
 [ext_resource type="Script" uid="uid://r63xrmgmn4pe" path="res://scripts/character_visuals.gd" id="1_kdtuy"]
-[ext_resource type="Texture2D" uid="uid://crk6ktyrp55pk" path="res://sprites_placeholder/man prototype_angry1.png" id="1_ti0dr"]
-[ext_resource type="Texture2D" uid="uid://bqppxliyp41eq" path="res://sprites_placeholder/man prototype_angry2.png" id="2_kdtuy"]
 [ext_resource type="PackedScene" uid="uid://bnh3l4sqeo2i0" path="res://scenes/character_visuals_a.tscn" id="2_x1ysr"]
-[ext_resource type="Texture2D" uid="uid://dnxekqy5t4rsq" path="res://sprites_placeholder/man prototype.png" id="3_5ufdq"]
-[ext_resource type="Texture2D" uid="uid://dpm663e6rl1fl" path="res://sprites_placeholder/man prototype_attack_1.png" id="4_i3au4"]
-[ext_resource type="Texture2D" uid="uid://baxawcka0yqou" path="res://sprites_placeholder/man prototype_attack_2.png" id="5_x1ysr"]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_lrhn5"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("1_ti0dr")
-}, {
-"duration": 1.0,
-"texture": ExtResource("2_kdtuy")
-}],
-"loop": true,
-"name": &"angry",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("4_i3au4")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_i3au4")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_x1ysr")
-}],
-"loop": false,
-"name": &"attack",
-"speed": 10.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("3_5ufdq")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
 
 [node name="CharacterVisuals" type="Node3D"]
 script = ExtResource("1_kdtuy")
@@ -56,11 +15,3 @@ frame_progress = 0.0
 transform = Transform3D(0.11, 0, 0, 0, 0.11, 0, 0, 0, 0.11, 0, 1.584256, 0)
 animation = &"default"
 frame_progress = 0.0
-
-[node name="AnimatedSprite3D2" type="AnimatedSprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0542381, 0)
-visible = false
-billboard = 2
-sprite_frames = SubResource("SpriteFrames_lrhn5")
-animation = &"attack"
-autoplay = "default"
